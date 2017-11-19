@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 
@@ -80,12 +81,18 @@ namespace ObjectPrinting
             if (finalTypes.Contains(obj.GetType()))
                 return obj + Environment.NewLine;
 
-            var builder = new StringBuilder();
-            builder.AppendLine(type.Name);
-            var indentation = new string('\t', nestingLevel + 1);
             var properties = type.GetProperties()
                 .Where(p => !excludedTypes.Contains(p.PropertyType))
                 .Where(p => !excludedProperties.Contains($"{path}.{p.Name}"));
+
+            return type.Name + Environment.NewLine + 
+                   PrintProperties(obj, properties, nestingLevel, path);
+        }
+
+        private string PrintProperties(object obj, IEnumerable<PropertyInfo> properties, int nestingLevel, string path)
+        {
+            var builder = new StringBuilder();
+            var indentation = new string('\t', nestingLevel + 1);
             foreach (var propertyInfo in properties)
             {
                 var propertyPath = $"{path}.{propertyInfo.Name}";
@@ -101,7 +108,6 @@ namespace ObjectPrinting
                         nestingLevel + 1, propertyPath));
                 }
             }
-
             return builder.ToString();
         }
     }
