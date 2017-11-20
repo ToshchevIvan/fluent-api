@@ -63,13 +63,36 @@
     <Compile Include="SelectedEntityPrintingConfig.cs" />
     <Compile Include="PropertyPrintingConfigExtensions.cs" />
     <Compile Include="Tests\ObjectPrinterAcceptanceTests.cs" />
+    <Compile Include="Tests\ObjectPrinter_should.cs" />
     <Compile Include="Tests\Person.cs" />
     <Compile Include="TypePrintingConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Tests\TestCases\BeAbleToUseCustomSerializer.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\TestCases\ExcludeTypes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\TestCases\ExcludeProperties.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\TestCases\NotExcludePropertiesRecursively.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\TestCases\PrintNullsCorrectly.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\TestCases\PrintWithoutModifiers.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\TestCases\TrimStringsToLength.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

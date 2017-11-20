@@ -14,8 +14,7 @@ namespace ObjectPrinting.Tests
             var person = new Person
             {
                 Name = "Alex",
-                Age = 19,
-                Parent = new Person {Name = "John", Age = 40, Height = 170}
+                Age = 19
             };
 
             var printer = ObjectPrinter.For<Person>()

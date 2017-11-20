@@ -1,0 +1,12 @@
+Person
+	Id = Guid
+	Name = Alex
+	Height = 170
+	Age = 19
+	Mother = Person
+		Id = Guid
+		Name = Elisabeth
+		Height = 165
+		Age = 47
+		Father = null
+		Mother = null
