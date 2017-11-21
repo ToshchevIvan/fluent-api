@@ -8,6 +8,9 @@ using System.Text;
 
 namespace ObjectPrinting
 {
+    //TODO RV(atolstov): Попробуй сделать данный класс Immutable.
+    //          https://msdn.microsoft.com/ru-ru/library/system.collections.immutable(v=vs.111).aspx - пригодится
+    //          Тогда ты всегда сможешь вынести логику "печати" в отдельный класс (Printer), а PrintingConfig передавать ему ввиде ссылки
     public class PrintingConfig<TOwner>
     {
         private readonly HashSet<Type> excludedTypes = new HashSet<Type>();
@@ -66,14 +69,15 @@ namespace ObjectPrinting
             }
         }
 
-        private string PrintToString(object obj, int nestingLevel, string path)
+        //TODO RV(atolstov): Вот эту логику можно вынести в принтер
+        private string PrintToString(object obj, int nestingLevel, string path) //TODO RV(atolstov): К имени такого метода стоит добавлять суффикс Internal
         {
             if (obj == null)
                 return "null" + Environment.NewLine;
 
             var type = obj.GetType();
 
-            var finalTypes = new[]
+            var finalTypes = new[] //TODO RV(atolstov): А uint уже не finalType? Придумай другой способ определения non-user-defined классов
             {
                 typeof(int), typeof(double), typeof(float), typeof(string),
                 typeof(DateTime), typeof(TimeSpan)
@@ -81,7 +85,7 @@ namespace ObjectPrinting
             if (finalTypes.Contains(obj.GetType()))
                 return obj + Environment.NewLine;
 
-            var properties = type.GetProperties()
+            var properties = type.GetProperties() //TODO RV(atolstov): а почему поля игнорируются?
                 .Where(p => !excludedTypes.Contains(p.PropertyType))
                 .Where(p => !excludedProperties.Contains($"{path}.{p.Name}"));
 

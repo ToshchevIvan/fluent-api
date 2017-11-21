@@ -90,6 +90,7 @@ namespace ObjectPrinting.Tests
         // иначе говоря, Excluding(p => p.Father) исключит Father 
         // только из объекта на первом уровне, но не из остальных
         // Так, например, делает FluentAssertions
+        //TODO RV(atolstov): Не стоит так делать: все изменения "печати" для свойств должны применяться рекурсивно
         public void NotExcludePropertiesRecursively()
         {
             ObjectPrinter.For<Person>()
