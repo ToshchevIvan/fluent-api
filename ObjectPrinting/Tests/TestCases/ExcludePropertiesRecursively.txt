@@ -8,5 +8,4 @@ Person
 		Name = Elisabeth
 		Height = 165
 		Age = 47
-		Father = null
 		Mother = null

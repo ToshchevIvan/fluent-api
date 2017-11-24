@@ -6,18 +6,18 @@ namespace ObjectPrinting
 {
     public class TypePrintingConfig<TOwner, TPropType> : SelectedEntityPrintingConfig<TOwner, TPropType>
     {
-        private readonly Dictionary<Type, Delegate> customTypePrinters;
-        
-        internal TypePrintingConfig(PrintingConfig<TOwner> printingConfig, 
-            Dictionary<Type, Delegate> customTypePrinters) : base(printingConfig)
+        internal TypePrintingConfig(PrintingConfig<TOwner> printingConfig) : base(printingConfig)
         {
-            this.customTypePrinters = customTypePrinters;
         }
-        
+
         public override PrintingConfig<TOwner> Using(Func<TPropType, string> print)
         {
-            customTypePrinters.Add(typeof(TPropType), print);
-            return PrintingConfig;
+            return new PrintingConfig<TOwner>(
+                PrintingConfig.ExcludedTypes,
+                PrintingConfig.CustomTypePrinters.Add(typeof(TPropType), print),
+                PrintingConfig.ExcludedMembers,
+                PrintingConfig.CustomMemberPrinters
+            );
         }
     }
 }

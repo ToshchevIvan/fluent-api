@@ -43,6 +43,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -55,13 +58,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MemberInfoHelper.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="ObjectPrinter.cs" />
     <Compile Include="PrintingConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyPrintingConfig.cs" />
+    <Compile Include="MemberPrintingConfig.cs" />
     <Compile Include="SelectedEntityPrintingConfig.cs" />
-    <Compile Include="PropertyPrintingConfigExtensions.cs" />
+    <Compile Include="MemberPrintingConfigExtensions.cs" />
     <Compile Include="Tests\ObjectPrinterAcceptanceTests.cs" />
     <Compile Include="Tests\ObjectPrinter_should.cs" />
     <Compile Include="Tests\Person.cs" />
@@ -80,7 +84,7 @@
     <Content Include="Tests\TestCases\ExcludeProperties.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tests\TestCases\NotExcludePropertiesRecursively.txt">
+    <Content Include="Tests\TestCases\ExcludePropertiesRecursively.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tests\TestCases\PrintNullsCorrectly.txt">

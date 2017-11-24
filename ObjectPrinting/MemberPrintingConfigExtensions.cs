@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace ObjectPrinting
 {
-    public static class PropertyPrintingConfigExtensions
+    public static class MemberPrintingConfigExtensions
     {
         public static string PrintToString<T>(this T obj, Func<PrintingConfig<T>, PrintingConfig<T>> config)
         {

@@ -87,23 +87,28 @@ namespace ObjectPrinting.Tests
         }
 
         [Test]
+<<<<<<< HEAD
+        public void ExcludePropertiesRecursively()
+=======
         // иначе говоря, Excluding(p => p.Father) исключит Father 
         // только из объекта на первом уровне, но не из остальных
         // Так, например, делает FluentAssertions
+        //TODO RV(atolstov): Не стоит так делать: все изменения "печати" для свойств должны применяться рекурсивно
         public void NotExcludePropertiesRecursively()
+>>>>>>> 7d85c9f77ff8dd3079461c8959d0341a491c8f44
         {
             ObjectPrinter.For<Person>()
                 .Excluding(p => p.Father)
                 .PrintToString(person)
                 .Should()
-                .Be(ReadCase("NotExcludePropertiesRecursively"));
+                .Be(ReadCase("ExcludePropertiesRecursively"));
         }
 
         [Test]
         public void BeAbleToUseCustomSerializer()
         {
             ObjectPrinter.For<Person>()
-                .Printing(p => p.Height).Using(n => $"{(int) (n / 100)}.{n % 100}")
+                .Printing(p => p.Height).Using(n => $"{(int) (n / 100)}.{n % 100} m")
                 .PrintToString(person)
                 .Should()
                 .Be(ReadCase("BeAbleToUseCustomSerializer"));
