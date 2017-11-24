@@ -70,11 +70,14 @@ namespace ObjectPrinting
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string PrintToString(TOwner obj)
         {
             return new ObjectPrinter<TOwner>(this)
                 .PrintToString(obj);
 =======
+=======
+>>>>>>> 7d85c9f77ff8dd3079461c8959d0341a491c8f44
 =======
 >>>>>>> 7d85c9f77ff8dd3079461c8959d0341a491c8f44
         //TODO RV(atolstov): Вот эту логику можно вынести в принтер
