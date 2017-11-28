@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ObjectPrinting
 {
+    //TODO RV(atolstov): наверное StringEntityPrintingConfig?
     public class TypePrintingConfig<TOwner, TPropType> : SelectedEntityPrintingConfig<TOwner, TPropType>
     {
         internal TypePrintingConfig(PrintingConfig<TOwner> printingConfig) : base(printingConfig)

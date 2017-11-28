@@ -8,6 +8,10 @@ namespace ObjectPrinting
 {
     public class PrintingConfig<TOwner>
     {
+        //TODO RV(atolstov): почему public а не private?
+        //  стоило бы сюда добавить либо явную реализацию интерфейса, содержащего эти свойства
+        //  либо перенести в данный класс базовые методы, возвращающие его измененные копии
+        //  иначе список подсказок VS будет засоряться лишними полями
         public ImmutableHashSet<Type> ExcludedTypes { get; }
         public ImmutableDictionary<Type, Delegate> CustomTypePrinters { get; }
         public ImmutableHashSet<string> ExcludedMembers { get; }

@@ -40,7 +40,8 @@ namespace ObjectPrinting
         {
             return propConfig.Using(x => x.ToString(culture));
         }
-        
+
+        //TODO RV: where T : IFormattable (он умеет в ToString с культурой :) ). Но это доп 
         // uint, ulong, short, etc.
     }
 }
