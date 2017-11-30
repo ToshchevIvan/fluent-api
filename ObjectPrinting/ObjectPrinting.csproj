@@ -70,6 +70,7 @@
     <Compile Include="Tests\ObjectPrinter_should.cs" />
     <Compile Include="Tests\Person.cs" />
     <Compile Include="SelectedTypePrintingConfig.cs" />
+    <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

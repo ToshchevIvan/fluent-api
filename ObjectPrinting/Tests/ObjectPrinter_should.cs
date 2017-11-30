@@ -99,6 +99,9 @@ namespace ObjectPrinting.Tests
         [Test]
         public void BeAbleToUseCustomSerializer()
         {
+            Console.WriteLine(ObjectPrinter.For<Person>()
+                .Printing(p => p.Height).Using(n => $"{(int) (n / 100)}.{n % 100} m")
+                .PrintToString(person));
             ObjectPrinter.For<Person>()
                 .Printing(p => p.Height).Using(n => $"{(int) (n / 100)}.{n % 100} m")
                 .PrintToString(person)

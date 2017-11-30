@@ -1,17 +1,17 @@
 Person
-	Id = Guid
+	Id = 00000000-0000-0000-0000-000000000000
 	Name = Alex
 	Height = 170
 	Age = 19
 	Father = Person
-		Id = Guid
+		Id = 00000000-0000-0000-0000-000000000000
 		Name = Philippus Aureolus Theophrastus Bombastus von Hohenheim
 		Height = 172
 		Age = 50
 		Father = null
 		Mother = null
 	Mother = Person
-		Id = Guid
+		Id = 00000000-0000-0000-0000-000000000000
 		Name = Elisabeth
 		Height = 165
 		Age = 47

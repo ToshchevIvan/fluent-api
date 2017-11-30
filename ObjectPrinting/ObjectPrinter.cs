@@ -34,7 +34,7 @@ namespace ObjectPrinting
             if (obj == null)
                 return "null" + Environment.NewLine;
             var type = obj.GetType();
-            if (type.IsPrimitive || finalTypes.Contains(type))
+            if (type.IsPrimitive || type.IsSystemType())
                 return obj + Environment.NewLine;
 
             var members = type.GetMembers(BindingFlags.Public | BindingFlags.Instance)
@@ -61,15 +61,6 @@ namespace ObjectPrinting
 
             return builder.ToString();
         }
-
-        private static readonly HashSet<Type> finalTypes = new HashSet<Type>
-        {
-            typeof(string),
-            typeof(decimal),
-            typeof(DateTime),
-            typeof(TimeSpan),
-            typeof(DateTimeOffset)
-        };
 
         private Delegate GetMemberSerializer(IMemberInfoHelper helper)
         {

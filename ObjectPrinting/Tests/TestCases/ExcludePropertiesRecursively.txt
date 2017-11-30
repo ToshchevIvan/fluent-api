@@ -1,10 +1,10 @@
 Person
-	Id = Guid
+	Id = 00000000-0000-0000-0000-000000000000
 	Name = Alex
 	Height = 170
 	Age = 19
 	Mother = Person
-		Id = Guid
+		Id = 00000000-0000-0000-0000-000000000000
 		Name = Elisabeth
 		Height = 165
 		Age = 47
