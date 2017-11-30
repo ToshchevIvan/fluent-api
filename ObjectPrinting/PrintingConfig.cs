@@ -6,23 +6,36 @@ using System.Reflection;
 
 namespace ObjectPrinting
 {
-    public class PrintingConfig<TOwner>
+    public interface IPrintingConfig<TOwner>
+    {
+        ImmutableHashSet<Type> ExcludedTypes { get; }
+        ImmutableDictionary<Type, Delegate> CustomTypePrinters { get; }
+        ImmutableHashSet<string> ExcludedMembers { get; }
+        ImmutableDictionary<string, Delegate> CustomMemberPrinters { get; }
+    }
+    
+    public class PrintingConfig<TOwner> : IPrintingConfig<TOwner>
     {
         //TODO RV(atolstov): почему public а не private?
         //  стоило бы сюда добавить либо явную реализацию интерфейса, содержащего эти свойства
         //  либо перенести в данный класс базовые методы, возвращающие его измененные копии
         //  иначе список подсказок VS будет засоряться лишними полями
-        public ImmutableHashSet<Type> ExcludedTypes { get; }
-        public ImmutableDictionary<Type, Delegate> CustomTypePrinters { get; }
-        public ImmutableHashSet<string> ExcludedMembers { get; }
-        public ImmutableDictionary<string, Delegate> CustomMemberPrinters { get; }
+        ImmutableHashSet<Type> IPrintingConfig<TOwner>.ExcludedTypes => excludedTypes;
+        ImmutableDictionary<Type, Delegate> IPrintingConfig<TOwner>.CustomTypePrinters => customTypePrinters;
+        ImmutableHashSet<string> IPrintingConfig<TOwner>.ExcludedMembers => excludedMembers;
+        ImmutableDictionary<string, Delegate> IPrintingConfig<TOwner>.CustomMemberPrinters => customMemberPrinters;
+
+        private readonly ImmutableHashSet<Type> excludedTypes;
+        private readonly ImmutableDictionary<Type, Delegate> customTypePrinters;
+        private readonly ImmutableHashSet<string> excludedMembers;
+        private readonly ImmutableDictionary<string, Delegate> customMemberPrinters;
 
         public PrintingConfig()
         {
-            ExcludedTypes = ImmutableHashSet.Create<Type>();
-            CustomTypePrinters = ImmutableDictionary.Create<Type, Delegate>();
-            ExcludedMembers = ImmutableHashSet.Create<string>();
-            CustomMemberPrinters = ImmutableDictionary.Create<string, Delegate>();
+            excludedTypes = ImmutableHashSet.Create<Type>();
+            customTypePrinters = ImmutableDictionary.Create<Type, Delegate>();
+            excludedMembers = ImmutableHashSet.Create<string>();
+            customMemberPrinters = ImmutableDictionary.Create<string, Delegate>();
         }
 
         public PrintingConfig(ImmutableHashSet<Type> excludedTypes,
@@ -30,19 +43,19 @@ namespace ObjectPrinting
             ImmutableHashSet<string> excludedMembers,
             ImmutableDictionary<string, Delegate> customMemberPrinters)
         {
-            ExcludedTypes = excludedTypes;
-            CustomTypePrinters = customTypePrinters;
-            ExcludedMembers = excludedMembers;
-            CustomMemberPrinters = customMemberPrinters;
+            this.excludedTypes = excludedTypes;
+            this.customTypePrinters = customTypePrinters;
+            this.excludedMembers = excludedMembers;
+            this.customMemberPrinters = customMemberPrinters;
         }
 
         public PrintingConfig<TOwner> Excluding<TPropType>()
         {
             return new PrintingConfig<TOwner>(
-                    ExcludedTypes.Add(typeof(TPropType)),
-                    CustomTypePrinters,
-                    ExcludedMembers,
-                    CustomMemberPrinters
+                    excludedTypes.Add(typeof(TPropType)),
+                    customTypePrinters,
+                    excludedMembers,
+                    customMemberPrinters
                 );
         }
 
@@ -50,23 +63,23 @@ namespace ObjectPrinting
         {
             var memberName = GetMemberName(memberSelector);
             return new PrintingConfig<TOwner>(
-                ExcludedTypes,
-                CustomTypePrinters,
-                ExcludedMembers.Add(memberName),
-                CustomMemberPrinters
+                excludedTypes,
+                customTypePrinters,
+                excludedMembers.Add(memberName),
+                customMemberPrinters
             );
         }
 
-        public TypePrintingConfig<TOwner, TPropType> Printing<TPropType>()
+        public SelectedTypePrintingConfig<TOwner, TPropType> Printing<TPropType>()
         {
-            return new TypePrintingConfig<TOwner, TPropType>(this);
+            return new SelectedTypePrintingConfig<TOwner, TPropType>(this);
         }
 
-        public MemberPrintingConfig<TOwner, TPropType> Printing<TPropType>(
+        public SelectedMemberPrintingConfig<TOwner, TPropType> Printing<TPropType>(
             Expression<Func<TOwner, TPropType>> memberSelector)
         {
             var memberName = GetMemberName(memberSelector);
-            return new MemberPrintingConfig<TOwner, TPropType>(this, memberName);
+            return new SelectedMemberPrintingConfig<TOwner, TPropType>(this, memberName);
         }
 
         public string PrintToString(TOwner obj)

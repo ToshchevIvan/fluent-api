@@ -40,6 +40,7 @@ namespace ObjectPrinting
             public string Name => Info.Name;
             public Type MemberType => Info.PropertyType;
             public object GetValue(object instance) => Info.GetValue(instance);
+            
         }
     }
 }

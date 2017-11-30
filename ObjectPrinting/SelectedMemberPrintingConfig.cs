@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace ObjectPrinting
 {
-    public class MemberPrintingConfig<TOwner, TPropType> : SelectedEntityPrintingConfig<TOwner, TPropType>
+    public class SelectedMemberPrintingConfig<TOwner, TPropType> : SelectedEntityPrintingConfig<TOwner, TPropType>
     {
         private readonly string propertyName;
 
-        internal MemberPrintingConfig(PrintingConfig<TOwner> printingConfig, string propertyName) :
+        internal SelectedMemberPrintingConfig(IPrintingConfig<TOwner> printingConfig, string propertyName) :
             base(printingConfig)
         {
             this.propertyName = propertyName;

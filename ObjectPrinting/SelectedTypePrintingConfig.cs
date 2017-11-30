@@ -5,9 +5,10 @@ using System.Collections.Generic;
 namespace ObjectPrinting
 {
     //TODO RV(atolstov): наверное StringEntityPrintingConfig?
-    public class TypePrintingConfig<TOwner, TPropType> : SelectedEntityPrintingConfig<TOwner, TPropType>
+    // Почему же? Настраивается печать конкретного типа (TPropType), а не строки
+    public class SelectedTypePrintingConfig<TOwner, TPropType> : SelectedEntityPrintingConfig<TOwner, TPropType>
     {
-        internal TypePrintingConfig(PrintingConfig<TOwner> printingConfig) : base(printingConfig)
+        internal SelectedTypePrintingConfig(IPrintingConfig<TOwner> printingConfig) : base(printingConfig)
         {
         }
 

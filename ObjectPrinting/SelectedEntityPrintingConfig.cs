@@ -5,21 +5,21 @@ namespace ObjectPrinting
 {
     public abstract class SelectedEntityPrintingConfig<TOwner, TPropType> : IPropertyPrintingConfig<TOwner, TPropType>
     {
-        protected readonly PrintingConfig<TOwner> PrintingConfig;
+        protected readonly IPrintingConfig<TOwner> PrintingConfig;
 
-        internal SelectedEntityPrintingConfig(PrintingConfig<TOwner> printingConfig)
+        internal SelectedEntityPrintingConfig(IPrintingConfig<TOwner> printingConfig)
         {
             PrintingConfig = printingConfig;
         }
 
         public abstract PrintingConfig<TOwner> Using(Func<TPropType, string> print);
         
-        PrintingConfig<TOwner> IPropertyPrintingConfig<TOwner, TPropType>.ParentConfig => PrintingConfig;
+        IPrintingConfig<TOwner> IPropertyPrintingConfig<TOwner, TPropType>.ParentConfig => PrintingConfig;
     }
 
 
     public interface IPropertyPrintingConfig<TOwner, TPropType>
     {
-        PrintingConfig<TOwner> ParentConfig { get; }
+        IPrintingConfig<TOwner> ParentConfig { get; }
     }
 }
